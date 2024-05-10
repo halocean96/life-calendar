@@ -16,6 +16,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useAtom } from "jotai";
 import { dateInfoListAtom } from "@/atoms/dateInfoList";
 import { nanoid } from "nanoid";
+import DateInfoList from "@/sections/DateInfoList";
 
 export default function Home() {
   const [birthDate, setBirthDate] = useState(dayjs());
@@ -96,7 +97,7 @@ export default function Home() {
           >
             인생 달력 보러가기
           </Button>
-          <Button variant="secondary">인생 달력 구경하기</Button>
+          <DateInfoList />
         </div>
       </main>
     </LocalizationProvider>
