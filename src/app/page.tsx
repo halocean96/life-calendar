@@ -51,8 +51,8 @@ export default function Home() {
           <Label htmlFor="expect-age">기대수명을 알려주세요.</Label>
           <Input
             id="expect-age"
-            type="number"
             value={expectAge}
+            pattern="\d*"
             onChange={(e) => {
               setExpectAge(Number(e.target.value));
             }}
@@ -64,7 +64,7 @@ export default function Home() {
           </Label>
           <Input
             id="expect-health-age"
-            type="number"
+            pattern="\d*"
             value={expectHealthAge}
             onChange={(e) => {
               setExpectHealthAge(Number(e.target.value));
