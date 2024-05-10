@@ -40,11 +40,8 @@ const DateInfoList = () => {
             ) : (
               dateInfoList.map((dateInfo) => (
                 <Button
-                  onClick={(e) => {
-                    // @ts-ignore
-                    if (e.target?.tagName !== "svg") {
-                      router.push(`/calendar/${dateInfo.id}`);
-                    }
+                  onClick={() => {
+                    router.push(`/calendar/${dateInfo.id}`);
                   }}
                   key={dateInfo.id}
                   variant="outline"
@@ -54,7 +51,8 @@ const DateInfoList = () => {
                   <div>{`💪 ${dateInfo.expectHealthAge}`}</div>
                   <div>{`🪦 ${dateInfo.expectAge}`}</div>
                   <RxTrash
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setDateInfoList((prev) =>
                         prev.filter((item) => item.id !== dateInfo.id)
                       );
