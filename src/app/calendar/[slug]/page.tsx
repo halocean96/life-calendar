@@ -36,9 +36,11 @@ export default function CalendarPage() {
       </main>
     );
   }
-  const weekDiff = dayjs().diff(dateInfo.birthDate, "week");
-  //  weekList를 7개의 chunk로 나눈다, 하나의 52주
-  //  chunk를 순회하면서 4개를 채우고 다음으로 넘어간다
+  const diffYearBetweenBirthAndNow = dayjs().diff(
+    dayjs(dateInfo.birthDate),
+    "year"
+  );
+
   return (
     <main
       className={`flex gap-4 flex-col p-6 items-center ${PoetsenOneFont.className}`}
@@ -46,19 +48,19 @@ export default function CalendarPage() {
       <H2>Weeks of my life</H2>
       <section className="grid gap-2 grid-cols-7">
         {range(dateInfo.expectAge).map((year) => {
-          return (
-            <WeeksChunk
-              key={year}
-              fillCount={
-                dayjs().diff(
+          if (year < diffYearBetweenBirthAndNow)
+            return <WeeksChunk key={year} fillCount={52} />;
+          else if (year === diffYearBetweenBirthAndNow)
+            return (
+              <WeeksChunk
+                key={year}
+                fillCount={dayjs().diff(
                   dayjs(dateInfo.birthDate).add(year, "year"),
-                  "year"
-                ) > 0
-                  ? 52
-                  : 0
-              }
-            />
-          );
+                  "week"
+                )}
+              />
+            );
+          return <WeeksChunk key={year} fillCount={0} />;
         })}
       </section>
     </main>
