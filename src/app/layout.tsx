@@ -1,11 +1,18 @@
-"use client";
 import { Inter } from "next/font/google";
+import type { Viewport } from "next";
 import "./globals.css";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { koKR } from "@mui/x-date-pickers/locales";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
+export const metadata = {
+  title: "life calendar",
+};
 
 export default function RootLayout({
   children,
@@ -13,15 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <LocalizationProvider
-      localeText={
-        koKR.components.MuiLocalizationProvider.defaultProps.localeText
-      }
-      dateAdapter={AdapterDayjs}
-    >
-      <html lang="ko">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </LocalizationProvider>
+    <html lang="ko">
+      <body className={inter.className}>{children}</body>
+    </html>
   );
 }
