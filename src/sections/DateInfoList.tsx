@@ -13,8 +13,10 @@ import { useAtom } from "jotai";
 import { dateInfoListAtom } from "@/atoms/dateInfoList";
 import { P } from "@/components/Typography";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 const DateInfoList = () => {
+  const router = useRouter();
   const [dateInfoList] = useAtom(dateInfoListAtom);
   return (
     <Drawer>
@@ -38,6 +40,9 @@ const DateInfoList = () => {
             ) : (
               dateInfoList.map((dateInfo) => (
                 <Button
+                  onClick={() => {
+                    router.push(`/calendar/${dateInfo.id}`);
+                  }}
                   key={dateInfo.id}
                   variant="outline"
                   className="w-full flex justify-around items-center"

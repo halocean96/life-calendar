@@ -17,13 +17,15 @@ import { useAtom } from "jotai";
 import { dateInfoListAtom } from "@/atoms/dateInfoList";
 import { nanoid } from "nanoid";
 import DateInfoList from "@/sections/DateInfoList";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [birthDate, setBirthDate] = useState(dayjs());
   const [expectAge, setExpectAge] = useState(90);
   const [expectHealthAge, setExpectHealthAge] = useState(60);
   const { toast, dismiss } = useToast();
-  const [dateInfoList, setDateInfoList] = useAtom(dateInfoListAtom);
+  const [, setDateInfoList] = useAtom(dateInfoListAtom);
   return (
     <LocalizationProvider
       localeText={
@@ -83,15 +85,14 @@ export default function Home() {
                   dismiss(toastId);
                 }, 1000);
               } else {
-                setDateInfoList((prev) => [
-                  ...prev,
-                  {
-                    id: nanoid(),
-                    birthDate,
-                    expectAge,
-                    expectHealthAge,
-                  },
-                ]);
+                const dateInfo = {
+                  id: nanoid(8),
+                  birthDate,
+                  expectAge,
+                  expectHealthAge,
+                };
+                setDateInfoList((prev) => [...prev, dateInfo]);
+                router.push(`/calendar/${dateInfo.id}`);
               }
             }}
           >
