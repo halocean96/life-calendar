@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
 import { usePathname, useRouter } from "next/navigation";
+
 export default function CalendarPage() {
   const router = useRouter();
   const pathname = usePathname();
