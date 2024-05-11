@@ -48,8 +48,11 @@ export default function CalendarPage() {
       <H2>Weeks of my life</H2>
       <section className="grid gap-2 grid-cols-7">
         {range(dateInfo.expectAge).map((year) => {
+          const isHealthYear = year < dateInfo.expectHealthAge;
           if (year < diffYearBetweenBirthAndNow)
-            return <WeeksChunk key={year} fillCount={52} />;
+            return (
+              <WeeksChunk key={year} fillCount={52} healthYear={isHealthYear} />
+            );
           else if (year === diffYearBetweenBirthAndNow)
             return (
               <WeeksChunk
@@ -58,9 +61,12 @@ export default function CalendarPage() {
                   dayjs(dateInfo.birthDate).add(year, "year"),
                   "week"
                 )}
+                healthYear={isHealthYear}
               />
             );
-          return <WeeksChunk key={year} fillCount={0} />;
+          return (
+            <WeeksChunk key={year} fillCount={0} healthYear={isHealthYear} />
+          );
         })}
       </section>
     </main>
