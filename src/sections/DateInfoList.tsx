@@ -41,7 +41,7 @@ const DateInfoList = () => {
               dateInfoList.map((dateInfo) => (
                 <Button
                   onClick={() => {
-                    router.push(`/calendar/${dateInfo.id}`);
+                    router.push(`/calendar?id=${dateInfo.id}`);
                   }}
                   key={dateInfo.id}
                   variant="outline"

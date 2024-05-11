@@ -92,7 +92,7 @@ export default function HomePage() {
                   expectHealthAge,
                 };
                 setDateInfoList((prev) => [...prev, dateInfo]);
-                router.push(`/calendar/${dateInfo.id}`);
+                router.push(`/calendar?id=${dateInfo.id}`);
               }
             }}
           >

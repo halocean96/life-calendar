@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import PoetsenOneFont from "@/fonts/PoetsenOne";
 import dayjs from "dayjs";
 import { useAtom } from "jotai";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import WeeksChunk from "@/components/WeeksChunk";
 import { range } from "lodash-es";
 import weekYear from "dayjs/plugin/weekYear";
@@ -17,8 +17,8 @@ dayjs.extend(weekOfYear);
 
 export default function CalendarPage() {
   const router = useRouter();
-  const pathname = usePathname();
-  const calendarId = pathname.split("/")[2];
+  const searchParams = useSearchParams();
+  const calendarId = searchParams.get("id");
   const [dateInfoList] = useAtom(dateInfoListAtom);
   if (calendarId === "NO" || !calendarId) return null;
   const dateInfo = dateInfoList.find((v) => v.id === calendarId);
