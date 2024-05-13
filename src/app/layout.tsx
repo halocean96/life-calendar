@@ -13,6 +13,11 @@ export const viewport: Viewport = {
 
 export const metadata = {
   title: "life calendar",
+  openGraph: {
+    title: "Life Calendar",
+    description: "인생에 남은 주(weeks)를 보여줄게요.",
+    image: "https://life-calendar-iota.vercel.app/life-calendar-og.png",
+  },
 };
 
 export default function RootLayout({
